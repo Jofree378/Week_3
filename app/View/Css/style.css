@@ -1,0 +1,250 @@
+body{
+    font-family: Bahnschrift, sans-serif;
+    font-weight: lighter;
+    background-color: #90a955;
+}
+
+
+/* Страница */
+.page{
+    width: 450px;
+    height: 330px;
+    margin: 50px auto;
+    background: #ecf39e;
+}
+
+/* Превью */
+.titled{
+    font-weight: bold;
+    font-size: 23px;
+    text-align: center;
+}
+
+.preview{
+    padding-top: 25px;
+}
+
+.preview p{
+    padding: 0 20px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.href_hello{
+    margin-top: 40px;
+    font-size: 18px;
+    text-align: center;
+}
+
+.href_hello a{
+    display: block;
+    margin: 20px auto 0;
+    padding: 10px;
+
+
+    width: 200px;
+    border: 2px solid #588f49;
+    border-radius: 10px;
+    background-color: #90a955;
+    text-decoration: none;
+    color: #fff;
+}
+
+.href_hello a:hover{
+    background-color: #4f772d;
+}
+
+.href_hello a:active{
+    background-color: #31572c;
+}
+
+/* Регистрация */
+.form-group {
+    margin-bottom: 25px;
+}
+
+.register_page {
+    width: 260px;
+    padding: 20px;
+
+    margin: 50px auto;
+    background: #ecf39e;
+}
+
+.register-title {
+    margin: 0 0 15px;
+
+    font-size: 20px;
+    text-align: center;
+}
+
+.input {
+    display: block;
+    padding: 8px 10px;
+    width: 238px;
+    margin: auto;
+
+    border: 1px solid #ccc;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+/* Btn */
+
+.btn {
+    display: block;
+    width: 260px;
+    padding: 10px;
+    margin: 10px auto;
+
+    border: 0;
+    background-color: #90a955;
+
+    text-align: center;
+    color: #fff;
+    font-family: inherit;
+    font-size: 15px
+}
+
+.btn2 {
+    display: block;
+    width: 265px;
+    padding: 10px;
+    margin: auto;
+
+    border: 0;
+    background-color: #90a955;
+
+    color: #fff;
+    font-family: inherit;
+    font-size: 15px
+}
+
+.btn:hover{
+    background-color: #4f772d;
+}
+
+.btn:active {
+    background-color: #31572c;
+}
+
+.btn2:hover{
+    background-color: #4f772d;
+}
+
+.btn2:active {
+    background-color: #31572c;
+}
+
+.form-group a {
+    display: block;
+    width: 240px;
+    padding: 10px;
+
+    border: 0;
+    background-color: #90a955;
+    text-decoration: none;
+
+    text-align: center;
+    color: #fff;
+    font-weight: normal;
+    font-size: 15px;
+}
+
+.form-group a:hover{
+    background-color: #4f772d;
+}
+
+.form-group a:active {
+    background-color: #31572c;
+}
+
+/* Блоги */
+
+.homePage{
+    width: 700px;
+    padding-bottom: 10px;
+    margin: 50px auto;
+    background: #ecf39e;
+}
+
+
+
+.form-textarea{
+    display: block;
+    margin: 10px auto 10px;
+    width: 350px;
+    min-height: 200px;
+    height: 200px;
+    padding: 5px;
+    resize: vertical;
+
+    border: 1px solid #000;
+
+    font: inherit;
+}
+
+form label{
+    margin-left:165px;
+    font: inherit;
+}
+
+.border{
+    margin: 50px 50px;
+    border-top: 3px solid #777474;
+}
+
+.post {
+    display: block;
+    margin: 15px;
+    border: 2px solid #c44343;
+    padding: 5px;
+}
+
+.postUser{
+    padding: 5px;
+    font-family: Bahnschrift, sans-serif;
+    font-size: 12px;
+}
+
+.message {
+    font-family: Bahnschrift, sans-serif;
+    font-size: 18px;
+    margin: auto;
+}
+
+.quit {
+    display: block;
+    width: 150px;
+    padding: 10px;
+    text-decoration: none;
+    position: relative;
+    right: -715px;
+    top: -55px;
+    border: 0;
+    background-color: #d04040;
+
+    color: #fff;
+    text-align: center;
+    font-family: inherit;
+    font-size: 15px
+}
+
+.quit:hover {
+    background-color: #b73838;
+}
+.quit:active {
+    background-color: #a23232;
+}
+
+.labelFile{
+    display: block;
+    margin: 10px auto;
+    text-align: center;
+}
+
+.error {
+    padding: 5px;
+    font-family: Bahnschrift, sans-serif;
+    font-size: 12px;
+}
