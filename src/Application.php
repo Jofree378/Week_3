@@ -16,6 +16,7 @@ class Application
         $this->route = new Route();
     }
 
+    // Начало сессии подключение данных пользователя, сообщений и вывод ошибок
     public function run()
     {
         try {
@@ -28,6 +29,7 @@ class Application
             $view = new View();
             $this->controller->setView($view);
             $this->initUser();
+            $this->controller->preDispatch();
 
             $content = $this->controller->{$this->actionName}();
             echo $content;
@@ -41,22 +43,25 @@ class Application
 
     }
 
+    // Инициализация пользователя
     public function initUser()
     {
         $id = $_SESSION['user_id'];
         if ($id) {
             $user = \App\Model\User::getById($id);
             if ($user) {
-                $this->controller->setUser();
+                $this->controller->setUser($user);
             }
         }
     }
 
+    // Добавление роута
     private function addRoutes()
     {
         $this->route->addRoute('/blog', Blog::class, 'index');
     }
 
+    // Инициализация контроллера
     private function initController()
     {
         $controllerName = $this->route->getControllerName();
@@ -66,6 +71,7 @@ class Application
         $this->controller = new $controllerName;
     }
 
+    // Инициализация метода
     private function initAction()
     {
         $actionName = $this->route->getActionName();

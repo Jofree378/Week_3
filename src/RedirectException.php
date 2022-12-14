@@ -5,6 +5,7 @@ use Exception;
 
 class RedirectException extends Exception
 {
+    // Обработка ошибок и настройка переходов
     private $url;
 
     public function __construct(string $url)

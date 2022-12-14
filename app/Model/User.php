@@ -6,19 +6,22 @@ use Base\Db;
 
 class User extends AbstractModel
 {
+    // Модель пользователя
+
     private $userId;
     private $name;
     private $email;
     private $password;
     private $date;
 
+    // Сбор данных пользователя
     public function __construct($data = [])
     {
         if ($data) {
             $this->userId = $data['user_id'];
+            $this->name = $data['name'];
             $this->email = $data['email'];
             $this->password = $data['password'];
-            $this->name = $data['name'];
             $this->date = $data['date'];
         }
     }
@@ -43,8 +46,9 @@ class User extends AbstractModel
     /**
      * @return mixed
      */
-    public function getName() :string
+    public function getName(): string
     {
+        echo $this->name;
         return $this->name;
     }
 
@@ -108,6 +112,13 @@ class User extends AbstractModel
         return $this;
     }
 
+    // Определение пользователя как админа
+    public function isAdmin(): bool
+    {
+        return in_array($this->userId, ADMIN_ID);
+    }
+
+    // Сохранение пользователя в бд
     public function save()
     {
         $db = Db::getInstance();
@@ -123,10 +134,11 @@ class User extends AbstractModel
         return $id;
     }
 
+    // Данные о пользователе по id
     public static function getById(int $userId): ?self
     {
         $db = Db::getInstance();
-        $select = "SELECT * FROM users WHERE user_id = $userId";
+        $select = "SELECT * FROM users WHERE user_id = '$userId'";
         $data = $db->fetchOne($select);
         if (!$data) {
             return null;
@@ -135,6 +147,7 @@ class User extends AbstractModel
         return new self($data);
     }
 
+    // Данные о пользователе по email
     public static function getByEmail(string $email): ?self
     {
         $db = Db::getInstance();
@@ -147,6 +160,7 @@ class User extends AbstractModel
         return new self($data);
     }
 
+    // Хэширование пароля
     public static function getPasswordHash($password)
     {
         return sha1($password . 'cdso.vkd-l');

@@ -1,10 +1,3 @@
-body{
-    font-family: Bahnschrift, sans-serif;
-    font-weight: lighter;
-    background-color: #90a955;
-}
-
-
 /* Страница */
 .page{
     width: 450px;
@@ -198,7 +191,7 @@ form label{
     display: block;
     margin: 15px;
     border: 2px solid #c44343;
-    padding: 5px;
+    padding: 7px;
 }
 
 .postUser{
@@ -210,11 +203,12 @@ form label{
 .message {
     font-family: Bahnschrift, sans-serif;
     font-size: 18px;
-    margin: auto;
+    margin: 5px;
 }
 
 .quit {
     display: block;
+    margin-top: 50px;
     width: 150px;
     padding: 10px;
     text-decoration: none;
@@ -244,7 +238,40 @@ form label{
 }
 
 .error {
-    padding: 5px;
     font-family: Bahnschrift, sans-serif;
-    font-size: 12px;
+    font-size: 15px;
+}
+
+/* Удаление сообщения */
+.delete{
+    display: block;
+    width: 150px;
+    position: relative;
+    bottom: 0px;
+    padding: 10px;
+    text-decoration: none;
+    border: 0;
+    background-color: #d04040;
+
+    color: #fff;
+    text-align: center;
+    font-family: inherit;
+    font-size: 15px
+}
+
+.delete:hover {
+    background-color: #b73838;
+}
+.delete:active {
+    background-color: #a23232;
+}
+
+.image{
+    margin: 5px;
+}
+
+.user {
+    text-align: center;
+    font-family: Bahnschrift, sans-serif;
+    font-size: 20px;
 }

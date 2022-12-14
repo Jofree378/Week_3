@@ -5,6 +5,9 @@ use PDO;
 
 class Db
 {
+
+    /* ПОДКЛЮЧЕНИЕ БД */
+
     private static $instance;
     private $pdo;
     private $log = [];
@@ -44,60 +47,63 @@ class Db
     {
         $this->connect();
         $t = microtime(1);
-        $query = $this->pdo->prepare($query);
-        $ret = $query->execute($params);
+        $prepared = $this->pdo->prepare($query);
+        $ret = $prepared->execute($params);
         $t = microtime(1) - $t;
 
         if(!$ret) {
-            if ($query->errorCode()) {
-                trigger_error(json_encode($query->errorInfo()));
+            if ($prepared->errorCode()) {
+                trigger_error(json_encode($prepared->errorInfo()));
             }
             return false;
         }
 
         $this->log[] = ['query' => $query, 'time' => $t, 'method' => $method];
 
-        return $query->rowCount();
+        return $prepared->rowCount();
     }
 
     public function fetchAll(string $query, array $params = [], string $method = '')
     {
         $this->connect();
         $t = microtime(1);
-        $query = $this->pdo->prepare($query);
-        $ret = $query->execute($params);
+        $prepared = $this->pdo->prepare($query);
+        $ret = $prepared->execute($params);
         $t = microtime(1) - $t;
 
         if(!$ret) {
-            if ($query->errorCode()) {
-                trigger_error(json_encode($query->errorInfo()));
+            if ($prepared->errorCode()) {
+                trigger_error(json_encode($prepared->errorInfo()));
             }
             return false;
         }
 
         $this->log[] = ['query' => $query, 'time' => $t, 'method' => $method];
 
-        return $query->fetchAll(PDO::FETCH_ASSOC);
+        return $prepared->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function fetchOne(string $query, array $params = [], string $method = '')
     {
         $this->connect();
         $t = microtime(1);
-        $query = $this->pdo->prepare($query);
-        $ret = $query->execute($params);
+        $prepared = $this->pdo->prepare($query);
+        $ret = $prepared->execute($params);
         $t = microtime(1) - $t;
 
         if(!$ret) {
-            if ($query->errorCode()) {
-                trigger_error(json_encode($query->errorInfo()));
+            if ($prepared->errorCode()) {
+                trigger_error(json_encode($prepared->errorInfo()));
             }
             return false;
         }
 
         $this->log[] = ['query' => $query, 'time' => $t, 'method' => $method];
 
-        $result = $query->fetchAll(PDO::FETCH_ASSOC);
+        $result = $prepared->fetchAll(PDO::FETCH_ASSOC);
+        if(!$result) {
+            return false;
+        }
         return reset($result);
     }
 

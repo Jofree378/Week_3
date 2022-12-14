@@ -1,6 +1,8 @@
 <?php
 namespace Base;
 
+use App\Controller\Blog as BlogAlias;
+use App\Model\Blog;
 use App\Model\User;
 
 abstract class AbstractController
@@ -9,7 +11,10 @@ abstract class AbstractController
     protected $view;
     /** @var User */
     protected $user;
+    /** @var Blog */
+    protected $blog;
 
+    // Переход между файлами
     protected function redirect(string $url)
     {
         throw new RedirectException($url);
@@ -23,6 +28,16 @@ abstract class AbstractController
     public function setUser(User $user): void
     {
         $this->user = $user;
+    }
+
+    public function setPost(Blog $blog): void
+    {
+        $this->blog = $blog;
+    }
+
+    public function preDispatch()
+    {
+
     }
 }
 

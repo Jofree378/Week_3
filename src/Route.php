@@ -3,6 +3,7 @@ namespace Base;
 
 class Route
 {
+    // Создание автоматического роутинга
     private $controllerName;
     private $actionName;
     private $processed = false;

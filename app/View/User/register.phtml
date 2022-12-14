@@ -2,11 +2,14 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../Css/style.css">
     <title>Регистрация</title>
+    <!--  Подключение стилей  -->
+    <style><?= /** @var \Base\View $this */$this->renderStyle(); ?></style>
 </head>
 <body>
+<style><?= /** @var \Base\View $this */$this->renderStyleBody(); ?></style>
 <div class="register_page">
+    <!--  Форма регистрации  -->
     <h1 class="register-title">Регистрация</h1>
     <form action="/user/register" method="post">
         <div class="form-group">
@@ -28,10 +31,14 @@
         <div class="form-group">
             <button class="btn" type="submit">Зарегистрироваться</button>
         </div>
-
+        <!--  Вывод сообщений об ошибках  -->
         <?php if($this->error): ?>
-            <span class="error"><?=$this->error?></span>
+            <div class="form-group"><span class="error"><?=$this->error?></span></div>
         <?php endif; ?>
+        <!--  Кнопка входа  -->
+        <div class="form-group">
+            <a href="/user/authRedirect">Войти</a>
+        </div>
 
     </form>
 </div>
