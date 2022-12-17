@@ -22,7 +22,7 @@ class Admin extends AbstractController
     {
         $postId = (int)$_GET['id'];
         Blog::deleteByPostId($postId);
-        $this->redirect('/blog');
+        $this->redirect('/blog/twigIndex');
     }
 
 }

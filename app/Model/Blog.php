@@ -98,7 +98,7 @@ class Blog extends AbstractModel
 
         if(!empty($_FILES['userFile']['tmp_name'])) {
             $fileContent = file_get_contents($_FILES['userFile']['tmp_name']);
-            file_put_contents('../../images/' . $id . '.png', $fileContent);
+            file_put_contents('../images/' . $id . '.png', $fileContent);
         }
 
         return $id;

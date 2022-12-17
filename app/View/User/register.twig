@@ -1,0 +1,40 @@
+{% include 'User/header.twig' %}
+<body>
+<style>{{ styleBody|escape }}</style>
+<div class="register_page">
+    <!--  Форма регистрации  -->
+    <h1 class="register-title">Регистрация</h1>
+    <form action="/user/twigRegister" method="post">
+        <div class="form-group">
+            <input class="input" type="text" name="name" placeholder="Ваше имя">
+        </div>
+
+        <div class="form-group">
+            <input class="input" type="email" name="email" placeholder="Ваш email">
+        </div>
+
+        <div class="form-group">
+            <input class="input" type="password" name="password" placeholder="Ваш пароль">
+        </div>
+
+        <div class="form-group">
+            <input class="input" type="password" name="password-confirm" placeholder="Повторите пароль">
+        </div>
+
+        <div class="form-group">
+            <button class="btn" type="submit">Зарегистрироваться</button>
+        </div>
+        <!--  Вывод сообщений об ошибках  -->
+
+        <div class="form-group">{% include 'User/error.twig' %}</div>
+
+        <!--  Кнопка входа  -->
+        <div class="form-group">
+            <a href="/user/authRedirectTwig">Войти</a>
+        </div>
+
+    </form>
+</div>
+
+</body>
+</html>
