@@ -1,0 +1,44 @@
+{% include 'User/header.twig' %}
+<style>{{ styleBody|escape }}</style>
+<!-- Вывод сообщений по api -->
+{#{% if user == constant('ADMIN_ID[0]') %}#}
+{#<form action="/api/getUserPosts/?user_id=<?= $_GET['id'] ?>" method="get">#}
+{#    <input type="text" name="user_id" placeholder="Ввести id">#}
+{#    <input type="submit" value='Найти'>#}
+{#</form>#}
+{#{% endif %}#}
+<body>
+<div class="user"> Ваш email: {% userEmail %}</div>
+<div class="homePage">
+    <!--  Форма выхода  -->
+    <form action="/user/logout">
+        <input class="quit" type="submit" value="Выйти">
+    </form>
+    <!--  Форма ввода сообщений  -->
+    <form enctype="multipart/form-data" action="/blog/twigIndex" method="post">
+        <div class="form-group">
+            <label for="message">Введите сообщение:</label>
+            <textarea class="form-textarea" name="message" placeholder="Ваш текст" id="message"></textarea>
+            <label class="labelFile" for="file">Прикрепить картинку:</label>
+            <input class="btn2" type="file" name="userFile" id="file">
+            <input class="btn" type="submit" value="Отправить">
+        </div>
+    </form>
+    <!--  Вывод сообщений  -->
+    <div class="border"></div>
+    {% for post in posts %}
+    <div class="post">
+        <span class="postUser">Сообщение от <b> {% postByUsers.post.user_id.name %}</b> Отправлено {% post.datetime %}</span>
+        <div class="message"><?= $post['message']; ?></div>
+        {% if ('../../images/' ~ post.post_id ~ '.png') %}
+        <img class="image" src="/blog/image/?post_id={% post.post_id %}" alt="">
+        {% endif %}
+        {% if user == constant('ADMIN_ID[0]') %}
+        <a class="delete" href="/admin/delete/?id={% post.post_id %}">Удалить</a>
+        {% endif %}
+    </div>
+    {% endfor %}
+
+</div>
+</body>
+</html>
