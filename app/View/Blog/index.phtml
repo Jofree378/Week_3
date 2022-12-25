@@ -9,11 +9,12 @@
 <style><?= /** @var \Base\View $this */
     $this->renderStyleBody(); ?></style>
 <!-- Вывод сообщений по api -->
-<? if ($this->data['user'] == ADMIN_ID[0]) : ?>
+<? if ($this->data['user']['id'] == ADMIN_ID[0]) : ?>
     <form action="/api/getUserPosts/?user_id=<?= $_GET['id'] ?>" method="get">
         <input type="text" name="user_id" placeholder="Ввести id">
         <input type="submit" value='Найти'>
     </form>
+    <a class="btn" href="/admin/index">Редактирование пользователей</a>
 <? endif; ?>
 <body>
 <div class="user"> Ваш email: <?=$this->data['userEmail']?></div>
@@ -34,18 +35,21 @@
     </form>
     <!--  Вывод сообщений  -->
     <div class="border"></div>
+    <?=$this->data['error']?>
+    <? if(!$this->data['error']): ?>
     <? foreach ($this->data['posts'] as $post): ?>
         <div class="post">
-            <span class="postUser">Сообщение от <b><?= $this->data['postByUsers'][$post['user_id']]['name']; ?></b> Отправлено <?= $post['datetime']; ?></span>
+            <span class="postUser">Сообщение от <b><?= $post['userdata']['name']; ?></b> Отправлено <?= $post['send_at']; ?></span>
             <div class="message"><?= $post['message']; ?></div>
-            <? if (file_exists('../../images/' . $post['post_id'] . '.png')): ?>
-                <img class="image" src="<?= '/blog/image' ?>/?post_id=<?= $post['post_id'] ?>" alt="">
+            <? if (file_exists($post['image'])): ?>
+                <img class="image" src="<?= '/blog/image' ?>/?post_id=<?= $post['image'] ?>" alt="">
             <? endif; ?>
-            <? if ($this->data['user'] == ADMIN_ID[0]) : ?>
-                <a class="delete" href="/admin/delete/?id=<?= $post['post_id'] ?>">Удалить</a>
+            <? if ($this->data['user']['id'] == ADMIN_ID[0]) : ?>
+                <a class="delete" href="/admin/delete/?id=<?= $post['id'] ?>">Удалить</a>
             <? endif; ?>
         </div>
     <? endforeach; ?>
+    <? endif; ?>
 
 </div>
 </body>

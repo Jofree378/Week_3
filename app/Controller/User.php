@@ -15,17 +15,16 @@ class User extends AbstractController
 
         if ($email) {
             $password = htmlspecialchars($_POST['password']);
-
             $user = UserModel::getByEmail($email);
             if (!$user) {
                 $this->view->assign('error', 'Пользователь не найден');
             }
 
             if($user) {
-                if ($user->getPassword() != UserModel::getPasswordHash($password)) {
+                if ($user['password'] != UserModel::getPasswordHash($password)) {
                     $this->view->assign('error', 'Пользователь не найден');
                 } else {
-                    $_SESSION['user_id'] = $user->getUserId();
+                    $_SESSION['user_id'] = $user['id'];
                     $this->redirect('/blog/index');
                 }
             }
@@ -69,11 +68,12 @@ class User extends AbstractController
             // Регистрация
             if ($register) {
                 $user = new UserModel();
-                $user->setName($name)->setEmail($email)->setPassword(UserModel::getPasswordHash($password));
-
+                $user['name'] = $name;
+                $user['email'] = $email;
+                $user['password'] = UserModel::getPasswordHash($password);
                 $user->save();
 
-                $_SESSION['user_id'] = $user->getUserId();
+                $_SESSION['user_id'] = $user['id'];
                 $this->setUser($user);
 
                 $this->redirect('/blog/index');

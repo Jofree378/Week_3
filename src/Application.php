@@ -1,6 +1,7 @@
 <?php
 namespace Base;
 
+use App\Controller\Admin;
 use App\Controller\Blog;
 use App\Controller\User;
 
@@ -59,6 +60,8 @@ class Application
     private function addRoutes()
     {
         $this->route->addRoute('/blog', Blog::class, 'index');
+        $this->route->addRoute('/admin', Admin::class, 'makeTable');
+        $this->route->addRoute('/admin', Admin::class, 'saveUser');
     }
 
     // Инициализация контроллера

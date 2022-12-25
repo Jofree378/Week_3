@@ -25,7 +25,7 @@ abstract class AbstractController
         $this->view = $view;
     }
 
-    public function setUser(User $user): void
+    public function setUser($user): void
     {
         $this->user = $user;
     }

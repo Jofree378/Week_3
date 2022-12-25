@@ -275,3 +275,7 @@ form label{
     font-family: Bahnschrift, sans-serif;
     font-size: 20px;
 }
+
+.users{
+    display: flex;
+}

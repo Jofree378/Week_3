@@ -1,163 +1,50 @@
 <?php
 namespace App\Model;
 
-use Base\AbstractModel;
-use Base\Db;
+use Illuminate\Database\Eloquent\Model;
 
-class User extends AbstractModel
+class User extends Model
 {
     // Модель пользователя
 
-    private $userId;
-    private $name;
-    private $email;
-    private $password;
-    private $date;
+    public $table = 'users';
+    protected $primaryKey = 'id';
+    protected $fillable = [
+        'name',
+        'email',
+        'password',
+        'created_at',
+        'updated_at',
+    ];
 
-    // Сбор данных пользователя
-    public function __construct($data = [])
+    public function posts()
     {
-        if ($data) {
-            $this->userId = $data['user_id'];
-            $this->name = $data['name'];
-            $this->email = $data['email'];
-            $this->password = $data['password'];
-            $this->date = $data['date'];
-        }
+        return $this->hasMany(Blog::class, 'user_id', 'id');
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * @param mixed $userId
-     */
-    public function setUserId($userId): self
-    {
-        $this->userId = $userId;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getName(): string
-    {
-        echo $this->name;
-        return $this->name;
-    }
-
-    /**
-     * @param mixed $name
-     */
-    public function setName(string $name): self
-    {
-        $this->name = $name;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @param mixed $email
-     */
-    public function setEmail($email): self
-    {
-        $this->email = $email;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getPassword()
-    {
-        return $this->password;
-    }
-
-    /**
-     * @param mixed $password
-     */
-    public function setPassword($password): self
-    {
-        $this->password = $password;
-        return $this;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getDate(): string
-    {
-        return $this->date;
-    }
-
-    /**
-     * @param mixed $date
-     */
-    public function setDate(string $date): self
-    {
-        $this->date = $date;
-        return $this;
-    }
 
     // Определение пользователя как админа
-    public function isAdmin(): bool
+    public static function isAdmin($id): bool
     {
-        return in_array($this->userId, ADMIN_ID);
+        return in_array($id, ADMIN_ID);
     }
 
-    // Сохранение пользователя в бд
-    public function save()
+    // Получение всех пользователей
+    public static function getUsers()
     {
-        $db = Db::getInstance();
-        $insert = "INSERT INTO users (`name`, `email`, `date`, `password`) VALUES (:name, :email, NOW(), :password)";
-        $db->exec($insert, [
-            'name' => $this->name,
-            'email' => $this->email,
-            'password' => $this->password
-        ]);
-
-        $id = $db->lastInsertId();
-        $this->userId = $id;
-        return $id;
+        return self::query()->get()->toArray();
     }
 
     // Данные о пользователе по id
-    public static function getById(int $userId): ?self
+    public static function getById(int $userId)
     {
-        $db = Db::getInstance();
-        $select = "SELECT * FROM users WHERE user_id = '$userId'";
-        $data = $db->fetchOne($select);
-        if (!$data) {
-            return null;
-        }
-
-        return new self($data);
+        return self::query()->where('id', '=', $userId)->first();
     }
 
     // Данные о пользователе по email
-    public static function getByEmail(string $email): ?self
+    public static function getByEmail(string $email)
     {
-        $db = Db::getInstance();
-        $select = "SELECT * FROM users WHERE `email` = :email";
-        $data = $db->fetchOne($select, ['email' => $email]);
-        if (!$data) {
-            return null;
-        }
-
-        return new self($data);
+        return self::query()->where('email','=', $email)->first();
     }
 
     // Хэширование пароля
